@@ -1,11 +1,13 @@
 # mktgoo Data
 
+This is a Sketch plugin to fetch and update copies using external services like Airtable or Google Spreadsheets.
+
 ## Installation
 
-- [Download](../../releases/latest/download/mktgoo-data.sketchplugin.zip) the
+- [Download](../../releases/latest/download/sketch-copies.sketchplugin.zip) the
   latest release of the plugin
 - Un-zip
-- Double-click on mktgoo-data.sketchplugin
+- Double-click on sketch-copies.sketchplugin
 
 ## Development Guide
 
@@ -32,56 +34,6 @@ To watch for changes:
 
 ```bash
 npm run watch
-```
-
-### Custom Configuration
-
-#### Babel
-
-To customize Babel, you have two options:
-
-- You may create a [`.babelrc`](https://babeljs.io/docs/usage/babelrc) file in
-  your project's root directory. Any settings you define here will overwrite
-  matching config-keys within skpm preset. For example, if you pass a "presets"
-  object, it will replace & reset all Babel presets that skpm defaults to.
-
-- If you'd like to modify or add to the existing Babel config, you must use a
-  `webpack.skpm.config.js` file. Visit the [Webpack](#webpack) section for more
-  info.
-
-#### Webpack
-
-To customize webpack create `webpack.skpm.config.js` file which exports function
-that will change webpack's config.
-
-```js
-/**
- * Function that mutates original webpack config.
- * Supports asynchronous changes when promise is returned.
- *
- * @param {object} config - original webpack config.
- * @param {object} entry - entry property from webpack config
- * @param {boolean} entry.isPluginCommand - whether the config is for a plugin command or a resource
- **/
-module.exports = function (config, entry) {
-  /** you can change config here **/
-};
-```
-
-To use the polyfills or the mocks for certain Node.js globals and modules use
-the `node` property.
-
-Visit [the official documention](https://webpack.js.org/configuration/node/) for
-available options.
-
-```js
-if (entry.isPluginCommand) {
-  config.node = {
-    setImmediate: false,
-  };
-} else {
-  config.node = false;
-}
 ```
 
 ### Debugging

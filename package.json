@@ -23,7 +23,7 @@
     "@skpm/builder": "^0.7.4"
   },
   "author": "Oscar Otero <oscar@marketgoo.com>",
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/marketgoo/sketch-copies.git"
   }
