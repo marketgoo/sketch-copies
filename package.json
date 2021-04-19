@@ -1,0 +1,30 @@
+{
+  "name": "mktgoo-sketch-copies",
+  "version": "0.1.0",
+  "description": "A data supplier plugin for copies, by marketgoo",
+  "engines": {
+    "sketch": ">=3.0"
+  },
+  "skpm": {
+    "name": "mktgoo-data",
+    "manifest": "src/manifest.json",
+    "main": "mktgoo-data.sketchplugin",
+    "assets": [
+      "assets/**/*"
+    ],
+    "sketch-assets-file": "sketch-assets/icons.sketch"
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "start": "skpm-build --watch",
+    "postinstall": "npm run build && skpm-link"
+  },
+  "devDependencies": {
+    "@skpm/builder": "^0.7.4"
+  },
+  "author": "Oscar Otero <oscar@marketgoo.com>",
+  "repository" : {
+    "type": "git",
+    "url": "git+https://github.com/marketgoo/sketch-copies.git"
+  }
+}

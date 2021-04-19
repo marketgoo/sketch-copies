@@ -1,0 +1,35 @@
+{
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "suppliesData": true,
+  "commands": [
+    {
+      "script": "./main.js",
+      "handlers": {
+        "actions": {
+          "Startup": "onStartup",
+          "Shutdown": "onShutdown",
+          "SupplyData": "onSupplyData",
+          "SupplySingleData": "onSupplySingleData"
+        }
+      }
+    },
+    {
+      "name": "Export new copies",
+      "identifier": "export-copies",
+      "script": "export.js"
+    },
+    {
+      "name": "Update copies",
+      "identifier": "update-copies",
+      "script": "update.js"
+    }
+  ],
+  "menu": {
+    "title": "mktgoo Copies",
+    "items": [
+      "update-copies"
+    ]
+  }
+}
