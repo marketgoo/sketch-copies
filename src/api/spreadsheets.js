@@ -5,11 +5,11 @@ import { alert, prompt } from "../utils.js";
 function getAPIData() {
   const document = Document.getSelectedDocument();
 
-  let url = Settings.documentSettingForKey(document, "mktgoo.copies.url");
+  let url = Settings.documentSettingForKey(document, "mktgoo.copies.spreadsheet.url");
 
   if (!url) {
     url = prompt("What's the public url of the tsv file?", "");
-    Settings.setDocumentSettingForKey(document, "mktgoo.copies.url", url);
+    Settings.setDocumentSettingForKey(document, "mktgoo.copies.spreadsheet.url", url);
   }
 
   return url;
@@ -31,7 +31,7 @@ export async function get() {
       const data = {};
 
       text.split("\n").forEach((line) => {
-        const [key, value] = line.split("\t");
+        const [key, value] = line.trim().split("\t", 2);
         data[key] = value;
       });
 

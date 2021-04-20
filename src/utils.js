@@ -20,6 +20,27 @@ export function prompt(question, initialValue) {
   return value;
 }
 
+export function select(question, options, initialValue) {
+  let value = initialValue;
+
+  UI.getInputFromUser(
+    question,
+    {
+      type: UI.INPUT_TYPE.selection,
+      initialValue: initialValue,
+      possibleValues: options,
+    },
+    (err, response) => {
+      if (err) {
+        throw new Error(err);
+      }
+      value = response;
+    },
+  );
+
+  return value;
+}
+
 export function alert(title, message) {
   UI.alert(title, message);
 }

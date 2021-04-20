@@ -24,12 +24,19 @@
       "name": "Update copies",
       "identifier": "update-copies",
       "script": "update.js"
+    },
+    {
+      "name": "Set copies source",
+      "identifier": "refresh-source",
+      "script": "api.js",
+      "handler": "setType"
     }
   ],
   "menu": {
     "title": "mktgoo Copies",
     "items": [
-      "update-copies"
+      "update-copies",
+      "refresh-source"
     ]
   }
 }

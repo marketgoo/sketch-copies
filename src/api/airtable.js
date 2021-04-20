@@ -5,23 +5,23 @@ import { alert, prompt } from "../utils.js";
 function getAPIData() {
   const document = Document.getSelectedDocument();
 
-  let database = Settings.settingForKey("mktgoo.copies.database");
-  let apikey = Settings.settingForKey("mktgoo.copies.apikey");
-  let table = Settings.documentSettingForKey(document, "mktgoo.copies.table");
+  let database = Settings.settingForKey("mktgoo.copies.airtable.database");
+  let apikey = Settings.settingForKey("mktgoo.copies.airtable.apikey");
+  let table = Settings.documentSettingForKey(document, "mktgoo.copies.airtable.table");
 
   if (!database) {
     database = prompt("What's the database?");
-    Settings.setSettingForKey("mktgoo.copies.database", database);
+    Settings.setSettingForKey("mktgoo.copies.airtable.database", database);
   }
 
   if (!apikey) {
     apikey = prompt("What's the API key?");
-    Settings.setSettingForKey("mktgoo.copies.apikey", apikey);
+    Settings.setSettingForKey("mktgoo.copies.airtable.apikey", apikey);
   }
 
   if (!table) {
     table = prompt("What's the table?");
-    Settings.setDocumentSettingForKey(document, "mktgoo.copies.table", table);
+    Settings.setDocumentSettingForKey(document, "mktgoo.copies.airtable.table", table);
   }
 
   return [database, apikey, table];
