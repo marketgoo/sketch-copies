@@ -4,7 +4,7 @@ This is a Sketch plugin to fetch and update copies using external services like 
 
 ## Installation
 
-- [Download](../../releases/latest/download/sketch-copies.sketchplugin.zip) the
+- [Download](../../releases/latest/download/mktgoo-sketch-copies.sketchplugin.zip) the
   latest release of the plugin
 - Un-zip
 - Double-click on sketch-copies.sketchplugin
@@ -15,16 +15,10 @@ This plugin was created using `skpm`. For a detailed explanation on how things
 work, checkout the
 [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md).
 
-Install the dependencies
+Install the dependencies and run it
 
 ```bash
 npm install
-```
-
-Once the installation is done, you can run some commands inside the project
-folder:
-
-```bash
 npm start
 ```
 

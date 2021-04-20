@@ -6,9 +6,9 @@
     "sketch": ">=3.0"
   },
   "skpm": {
-    "name": "mktgoo-data",
+    "name": "mktgoo-sketch-copies",
     "manifest": "src/manifest.json",
-    "main": "mktgoo-data.sketchplugin",
+    "main": "mktgoo-sketch-copies.sketchplugin",
     "assets": [
       "assets/**/*"
     ],
