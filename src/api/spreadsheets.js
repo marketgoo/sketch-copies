@@ -5,11 +5,18 @@ import { alert, prompt } from "../utils.js";
 function getAPIData() {
   const document = Document.getSelectedDocument();
 
-  let url = Settings.documentSettingForKey(document, "mktgoo.copies.spreadsheet.url");
+  let url = Settings.documentSettingForKey(
+    document,
+    "mktgoo.copies.spreadsheet.url",
+  );
 
   if (!url) {
     url = prompt("What's the public url of the tsv file?", "");
-    Settings.setDocumentSettingForKey(document, "mktgoo.copies.spreadsheet.url", url);
+    Settings.setDocumentSettingForKey(
+      document,
+      "mktgoo.copies.spreadsheet.url",
+      url,
+    );
   }
 
   return url;

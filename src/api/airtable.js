@@ -7,7 +7,10 @@ function getAPIData() {
 
   let database = Settings.settingForKey("mktgoo.copies.airtable.database");
   let apikey = Settings.settingForKey("mktgoo.copies.airtable.apikey");
-  let table = Settings.documentSettingForKey(document, "mktgoo.copies.airtable.table");
+  let table = Settings.documentSettingForKey(
+    document,
+    "mktgoo.copies.airtable.table",
+  );
 
   if (!database) {
     database = prompt("What's the database?");
@@ -21,7 +24,11 @@ function getAPIData() {
 
   if (!table) {
     table = prompt("What's the table?");
-    Settings.setDocumentSettingForKey(document, "mktgoo.copies.airtable.table", table);
+    Settings.setDocumentSettingForKey(
+      document,
+      "mktgoo.copies.airtable.table",
+      table,
+    );
   }
 
   return [database, apikey, table];

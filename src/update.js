@@ -2,14 +2,12 @@ import sketch from "sketch";
 import Settings from "sketch/settings";
 import { get } from "./api.js";
 import { alert, isValidName } from "./utils.js";
-import { isHtml, replace } from "./replace.js";
+import replace from "./replace.js";
 
 export default async function () {
   const data = await get();
   let copies = 0;
   let changes = 0;
-
-  const document = sketch.getSelectedDocument();
 
   sketch.find("Text").forEach((layer) => {
     const id = layer.name;
@@ -17,13 +15,9 @@ export default async function () {
     if (id in data) {
       ++copies;
 
-      if (layer.text !== data[id]) {
-        if (isHtml(data[id])) {
-          document.selectedLayers = [layer];
-          replace(layer, data[id]);
-        } else {
-          layer.text = data[id];
-        }
+      const result = replace(layer, data[id]);
+
+      if (result === true) {
         ++changes;
       }
     }
@@ -42,7 +36,9 @@ export default async function () {
       if (!override.isDefault && isValidName(id, data)) {
         ++copies;
 
-        if (override.value !== data[id]) {
+        const result = replace(layer, data[id], false, true);
+
+        if (typeof result === "string") {
           override.value = data[id];
           layer.resizeWithSmartLayout();
           ++changes;

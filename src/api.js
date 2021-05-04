@@ -6,11 +6,11 @@ import { select } from "./utils.js";
 const supportedApis = {
   "Airtable": getFromAirtable,
   "Google Spreadsheets": getFromSpreadsheets,
-}
+};
 
 export async function get() {
   const type = Settings.settingForKey("mktgoo.copies.api") || setType();
-  
+
   return supportedApis[type]();
 }
 

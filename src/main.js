@@ -3,7 +3,7 @@ import Settings from "sketch/settings";
 import util from "util";
 import { get } from "./api.js";
 import { alert, isValidName, notify, prompt } from "./utils.js";
-import { isHtml, replace } from "./replace.js";
+import replace from "./replace.js";
 
 const { DataSupplier } = sketch;
 
@@ -42,17 +42,15 @@ export async function onSupplySingleData(context) {
   items.forEach((item, index) => {
     if (item.type === "Text") {
       const id = item.name;
+      const result = replace(item, data[id], true, true);
 
-      if (id in data) {
-        if (item.text !== data[id]) {
-          if (isHtml(data[id])) {
-            replace(item, data[id]);
-          } else {
-            DataSupplier.supplyDataAtIndex(dataKey, data[id], index);
-          }
-        } else {
+      if (result !== false) {
+        if (result === null) {
           notify("There's no copy changes for this layer");
+        } else if (typeof result === "string") {
+          DataSupplier.supplyDataAtIndex(dataKey, result, index);
         }
+
         item.name = id;
         return;
       }
@@ -61,17 +59,21 @@ export async function onSupplySingleData(context) {
         `The copy with id "${id}" was not found in the database. Add a new id`,
       );
 
-      if (newId in data) {
-        if (item.text !== data[newId]) {
-          DataSupplier.supplyDataAtIndex(dataKey, data[newId], index);
-        } else {
-          notify("There's no copy changes for this layer");
-        }
-        item.name = newId;
-        return;
+      const newResult = replace(item, data[newId], index, true, true);
+
+      if (newResult === false) {
+        return alert("Error", `The copy "${newId}" does not exist`);
       }
 
-      return alert("Error", `The copy "${newId}" does not exist`);
+      item.name = newId;
+
+      if (newResult === null) {
+        notify("There's no copy changes for this layer");
+      } else if (typeof newResult === "string") {
+        DataSupplier.supplyDataAtIndex(dataKey, newResult, index);
+      }
+
+      return;
     }
 
     if (item.type === "DataOverride") {
@@ -94,7 +96,11 @@ export async function onSupplySingleData(context) {
         Settings.setLayerSettingForKey(layer, settingsKey, id);
       }
 
-      DataSupplier.supplyDataAtIndex(dataKey, data[id], index);
+      const result = replace(item, data[id], false, true);
+
+      if (typeof result === "string") {
+        DataSupplier.supplyDataAtIndex(dataKey, result, index);
+      }
     }
   });
 }
