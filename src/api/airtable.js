@@ -12,23 +12,8 @@ function getAPIData() {
     "mktgoo.copies.airtable.table",
   );
 
-  if (!database) {
-    database = prompt("What's the database?");
-    Settings.setSettingForKey("mktgoo.copies.airtable.database", database);
-  }
-
-  if (!apikey) {
-    apikey = prompt("What's the API key?");
-    Settings.setSettingForKey("mktgoo.copies.airtable.apikey", apikey);
-  }
-
-  if (!table) {
-    table = prompt("What's the table?");
-    Settings.setDocumentSettingForKey(
-      document,
-      "mktgoo.copies.airtable.table",
-      table,
-    );
+  if (!database || !apikey || !table) {
+    return reset();
   }
 
   return [database, apikey, table];
@@ -60,4 +45,30 @@ export async function get() {
 
       return data;
     });
+}
+
+export function reset() {
+  const document = Document.getSelectedDocument();
+
+  let database = Settings.settingForKey("mktgoo.copies.airtable.database");
+  let apikey = Settings.settingForKey("mktgoo.copies.airtable.apikey");
+  let table = Settings.documentSettingForKey(
+    document,
+    "mktgoo.copies.airtable.table",
+  );
+  
+  database = prompt("What's the database?", database);
+  Settings.setSettingForKey("mktgoo.copies.airtable.database", database);
+
+  apikey = prompt("What's the API key?", apikey);
+  Settings.setSettingForKey("mktgoo.copies.airtable.apikey", apikey);
+
+  table = prompt("What's the table?", table);
+  Settings.setDocumentSettingForKey(
+    document,
+    "mktgoo.copies.airtable.table",
+    table,
+  );
+
+  return [database, apikey, table];
 }

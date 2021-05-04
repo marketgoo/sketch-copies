@@ -20,6 +20,9 @@ export default function replace(
     return false;
   }
 
+  // Replace line breaks
+  copy = copy.replaceAll(/\s*(<br \/>|<br>)\s*/g, "\u0085");
+
   // Replace variables
   copy = copy.replaceAll(/\{\{([^\}]+)\}\}/g, (string, key) => {
     let variable = Settings.layerSettingForKey(layer, `mktgoo.variable.${key}`);
@@ -43,7 +46,8 @@ export default function replace(
   if (multiFormat && /<[^>]+>/.test(copy)) {
     document.selectedLayers = [layer];
     makeReplace(layer, copy);
-    return true;
+
+    return (layer.text !== copy.replaceAll(/<[^>]+>/g, "")) ? true : null;
   }
 
   //Strip HTML tags
@@ -51,6 +55,10 @@ export default function replace(
 
   if (returnPlainCopy) {
     return copy;
+  }
+
+  if (layer.text === copy) {
+    return null;
   }
 
   layer.text = copy;

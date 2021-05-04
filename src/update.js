@@ -6,6 +6,7 @@ import replace from "./replace.js";
 
 export default async function () {
   const data = await get();
+  let unknown = new Set();
   let copies = 0;
   let changes = 0;
 
@@ -20,6 +21,8 @@ export default async function () {
       if (result === true) {
         ++changes;
       }
+    } else {
+      unknown.add(id);
     }
   });
 
@@ -56,13 +59,20 @@ export default async function () {
     );
   } else if (changes === 1) {
     alert(
-      "Copies updated",
-      `We have found ${copies} copies in your document, and ${changes} change was updated succesfully`,
+      `${changes} copy updated`,
+      `We have found ${copies} copies in your document, but only ${changes} needs to be updated`,
     );
   } else {
     alert(
-      "Copies updated",
-      `We have found ${copies} copies in your document, and ${changes} changes were updated succesfully`,
+      `${changes} copies updated`,
+      `We have found ${copies} copies in your document, but only ${changes} need to be updated`,
+    );
+  }
+
+  if (unknown.size) {
+    alert(
+      `${unknown.size} unknown copies found:`,
+      [...unknown].join(",\n")
     );
   }
 }

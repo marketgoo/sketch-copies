@@ -11,12 +11,7 @@ function getAPIData() {
   );
 
   if (!url) {
-    url = prompt("What's the public url of the tsv file?", "");
-    Settings.setDocumentSettingForKey(
-      document,
-      "mktgoo.copies.spreadsheet.url",
-      url,
-    );
+    return reset();
   }
 
   return url;
@@ -44,4 +39,23 @@ export async function get() {
 
       return data;
     });
+}
+
+export function reset() {
+  const document = Document.getSelectedDocument();
+
+  let url = Settings.documentSettingForKey(
+    document,
+    "mktgoo.copies.spreadsheet.url",
+  );
+
+  url = prompt("What's the public url of the tsv file?", url);
+
+  Settings.setDocumentSettingForKey(
+    document,
+    "mktgoo.copies.spreadsheet.url",
+    url,
+  );
+
+  return url;
 }
