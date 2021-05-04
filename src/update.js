@@ -72,7 +72,7 @@ export default async function () {
   if (unknown.size) {
     alert(
       `${unknown.size} unknown copies found:`,
-      [...unknown].join(",\n")
+      [...unknown].join(",\n"),
     );
   }
 }

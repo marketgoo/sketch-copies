@@ -56,7 +56,7 @@ export function reset() {
     document,
     "mktgoo.copies.airtable.table",
   );
-  
+
   database = prompt("What's the database?", database);
   Settings.setSettingForKey("mktgoo.copies.airtable.database", database);
 
