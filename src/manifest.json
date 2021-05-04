@@ -1,4 +1,9 @@
 {
+  "name": "Sketch Copies",
+  "homepage": "https://github.com/marketgoo/sketch-copies",
+  "description": "Fetch and update copies automatically from an external service like Google Spreadsheet or Airtable",
+  "author": "Óscar Otero",
+  "authorEmail": "oscar@marketgoo.com",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
