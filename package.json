@@ -1,6 +1,6 @@
 {
   "name": "mktgoo-sketch-copies",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A data supplier plugin for copies, by marketgoo",
   "engines": {
     "sketch": ">=3.0"
