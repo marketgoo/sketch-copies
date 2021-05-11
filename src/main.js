@@ -42,7 +42,7 @@ export async function onSupplySingleData(context) {
   items.forEach((item, index) => {
     if (item.type === "Text") {
       const id = item.name;
-      const result = replace(item, data[id], true, true);
+      const result = replace(item, data[id], true, true, true);
 
       if (result !== false) {
         if (result === null) {
@@ -96,7 +96,7 @@ export async function onSupplySingleData(context) {
         Settings.setLayerSettingForKey(layer, settingsKey, id);
       }
 
-      const result = replace(item, data[id], false, true);
+      const result = replace(item, data[id], false, true, true);
 
       if (typeof result === "string") {
         DataSupplier.supplyDataAtIndex(dataKey, result, index);

@@ -15,6 +15,7 @@ export default function replace(
   copy,
   multiFormat = true,
   returnPlainCopy = false,
+  refreshVariables = false,
 ) {
   if (!copy) {
     return false;
@@ -27,8 +28,11 @@ export default function replace(
   copy = copy.replaceAll(/\{\{([^\}]+)\}\}/g, (string, key) => {
     let variable = Settings.layerSettingForKey(layer, `mktgoo.variable.${key}`);
 
-    if (!variable) {
-      variable = prompt(`What's the value of "${string}"?: \n\n${copy}`);
+    if (!variable || refreshVariables) {
+      variable = prompt(
+        `What's the value of "${string}"?: \n\n${copy}`,
+        variable,
+      );
 
       if (variable) {
         Settings.setLayerSettingForKey(
